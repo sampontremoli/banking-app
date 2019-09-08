@@ -1,0 +1,48 @@
+package com.samuelepontremoli.data.db
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.samuelepontremoli.data.db.BankingDatabase.Companion.DB_VERSION
+import com.samuelepontremoli.data.entities.AccountData
+import com.samuelepontremoli.data.entities.TransactionData
+
+@Database(entities = [AccountData::class, TransactionData::class], version = DB_VERSION)
+abstract class BankingDatabase : RoomDatabase() {
+
+    abstract fun getTransactionHistoryDao(): TransactionHistoryDao
+
+    companion object {
+        const val DB_VERSION = 1
+        private const val DB_NAME = "banking_database.db"
+
+        @Volatile
+        private var INSTANCE: BankingDatabase? = null
+
+        /**
+         * Returns instance if not null, otherwise creates the db in a thread-safe way and returns it
+         */
+        fun getDatabase(context: Context): BankingDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: build(context).also { INSTANCE = it }
+            }
+        }
+
+        private fun build(context: Context): BankingDatabase {
+            return Room.databaseBuilder(context.applicationContext, BankingDatabase::class.java, DB_NAME)
+                .addMigrations(MIGRATION_1_TO_2)
+                .build()
+        }
+
+        private val MIGRATION_1_TO_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+            }
+        }
+
+    }
+
+}
