@@ -1,4 +1,4 @@
-package com.samuelepontremoli.bankingapp.entities.mapper
+package com.samuelepontremoli.data.network.entities.mapper
 
 abstract class Mapper<in T, E> {
 

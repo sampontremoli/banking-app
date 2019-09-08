@@ -1,4 +1,4 @@
-package com.samuelepontremoli.bankingapp.entities
+package com.samuelepontremoli.data.network.entities
 
 data class TransactionHistory (
     val account : String,

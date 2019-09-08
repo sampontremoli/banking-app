@@ -1,9 +1,9 @@
-package com.samuelepontremoli.bankingapp.entities.mapper
+package com.samuelepontremoli.data.network.entities.mapper
 
-import com.samuelepontremoli.bankingapp.entities.Transaction
-import com.samuelepontremoli.bankingapp.entities.TransactionHistory
-import com.samuelepontremoli.data.entities.TransactionData
-import com.samuelepontremoli.data.entities.TransactionHistoryData
+import com.samuelepontremoli.data.network.entities.Transaction
+import com.samuelepontremoli.data.network.entities.TransactionHistory
+import com.samuelepontremoli.data.db.entities.TransactionData
+import com.samuelepontremoli.data.db.entities.TransactionHistoryData
 
 class TransactionHistoryMapper: Mapper<TransactionHistoryData, TransactionHistory>() {
 

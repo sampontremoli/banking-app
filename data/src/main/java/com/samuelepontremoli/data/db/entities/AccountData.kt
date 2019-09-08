@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.entities
+package com.samuelepontremoli.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

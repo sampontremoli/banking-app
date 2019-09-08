@@ -1,8 +1,8 @@
 package com.samuelepontremoli.data.db
 
 import androidx.room.*
-import com.samuelepontremoli.data.entities.AccountData
-import com.samuelepontremoli.data.entities.TransactionHistoryData
+import com.samuelepontremoli.data.db.entities.AccountData
+import com.samuelepontremoli.data.db.entities.TransactionHistoryData
 import io.reactivex.Flowable
 
 @Dao

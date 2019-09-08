@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardViewLabelStyle" parent="android:TextAppearance.Small">
+        <item name="android:background">@drawable/background_rounded_primarycolor</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="CardViewTextStyle" parent="android:TextAppearance.Small">
+        <item name="android:padding">5dp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

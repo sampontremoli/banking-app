@@ -7,8 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.samuelepontremoli.data.db.BankingDatabase.Companion.DB_VERSION
-import com.samuelepontremoli.data.entities.AccountData
-import com.samuelepontremoli.data.entities.TransactionData
+import com.samuelepontremoli.data.db.entities.AccountData
+import com.samuelepontremoli.data.db.entities.TransactionData
 
 @Database(entities = [AccountData::class, TransactionData::class], version = DB_VERSION)
 abstract class BankingDatabase : RoomDatabase() {

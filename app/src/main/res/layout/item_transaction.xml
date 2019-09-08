@@ -1,12 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TRANSACTION!" />
+        android:background="@color/cardview_light_background"
+        android:padding="10dp">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/transaction_id_label"
+            style="@style/CardViewLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/id_label"
+            app:layout_constraintBottom_toTopOf="@id/transaction_description_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_id"
+            style="@style/CardViewTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="trx1"
+            app:layout_constraintBottom_toBottomOf="@id/transaction_id_label"
+            app:layout_constraintEnd_toStartOf="@+id/transaction_amount"
+            app:layout_constraintStart_toEndOf="@id/transaction_id_label"
+            app:layout_constraintTop_toTopOf="@+id/transaction_id_label" />
+
+        <TextView
+            android:id="@+id/transaction_amount"
+            style="@style/CardViewTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+22.30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_description_label"
+            style="@style/CardViewLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_label"
+            app:layout_constraintBottom_toTopOf="@id/transaction_other_account_label"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_description"
+            style="@style/CardViewTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pizza Alfredo's"
+            app:layout_constraintBottom_toBottomOf="@id/transaction_description_label"
+            app:layout_constraintEnd_toStartOf="@+id/transaction_amount"
+            app:layout_constraintStart_toEndOf="@id/transaction_description_label"
+            app:layout_constraintTop_toTopOf="@id/transaction_description_label" />
+
+        <TextView
+            android:id="@+id/transaction_other_account_label"
+            style="@style/CardViewLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other_account_label"
+            app:layout_constraintBottom_toTopOf="@id/transaction_date_label"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_other_account"
+            style="@style/CardViewTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="u98234n23jn4823"
+            app:layout_constraintBottom_toBottomOf="@id/transaction_other_account_label"
+            app:layout_constraintEnd_toEndOf="@+id/transaction_description"
+            app:layout_constraintStart_toEndOf="@id/transaction_other_account_label"
+            app:layout_constraintTop_toTopOf="@id/transaction_other_account_label" />
+
+        <TextView
+            android:id="@+id/transaction_date_label"
+            style="@style/CardViewLabelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/transaction_date"
+            style="@style/CardViewTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="22 December 2018"
+            app:layout_constraintBottom_toBottomOf="@id/transaction_date_label"
+            app:layout_constraintEnd_toStartOf="@+id/transaction_amount"
+            app:layout_constraintStart_toEndOf="@id/transaction_date_label"
+            app:layout_constraintTop_toTopOf="@id/transaction_date_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

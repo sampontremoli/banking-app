@@ -1,7 +1,7 @@
 package com.samuelepontremoli.bankingapp.di
 
-import com.samuelepontremoli.bankingapp.network.createNetworkClient
-import com.samuelepontremoli.data.api.TransactionHistoryApi
+import com.samuelepontremoli.data.network.createNetworkClient
+import com.samuelepontremoli.data.network.TransactionHistoryApi
 import com.samuelepontremoli.data.repository.TransactionHistoryRepository
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -13,10 +13,18 @@ const val TRANSACTION_REPO = "TransactionHistoryApiRepository"
 
 val networkModule = module {
 
-    single(named(RETROFIT_INSTANCE)) { createNetworkClient("https://api.myjson.com/") }
+    single(named(RETROFIT_INSTANCE)) {
+        createNetworkClient("https://api.myjson.com/")
+    }
 
-    single(named(TRANSACTION_API)) { (get(named(RETROFIT_INSTANCE)) as Retrofit).create(TransactionHistoryApi::class.java) }
+    single(named(TRANSACTION_API)) {
+        (get(named(RETROFIT_INSTANCE)) as Retrofit).create(
+            TransactionHistoryApi::class.java
+        )
+    }
 
-    single(named(TRANSACTION_REPO)) { TransactionHistoryRepository(get(named(TRANSACTION_API))) }
+    single(named(TRANSACTION_REPO)) {
+        TransactionHistoryRepository(get(named(TRANSACTION_API)))
+    }
 
 }

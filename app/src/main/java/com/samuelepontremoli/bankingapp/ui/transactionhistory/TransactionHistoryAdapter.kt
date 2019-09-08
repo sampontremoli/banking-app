@@ -5,7 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
-import com.samuelepontremoli.bankingapp.entities.Transaction
+import com.samuelepontremoli.data.network.entities.Transaction
+import kotlinx.android.synthetic.main.item_transaction.view.*
 
 class TransactionHistoryAdapter :
     RecyclerView.Adapter<TransactionHistoryAdapter.TransactionViewHolder>() {
@@ -36,7 +37,11 @@ class TransactionHistoryAdapter :
 
         fun bind(transaction: Transaction) {
             with(itemView) {
-
+                itemView.transaction_id.text = transaction.id
+                itemView.transaction_amount.text = transaction.amount.toString()
+                itemView.transaction_description.text = transaction.description
+                itemView.transaction_other_account.text = transaction.otherAccount
+                itemView.transaction_date.text = transaction.date
             }
         }
 

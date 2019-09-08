@@ -1,6 +1,6 @@
-package com.samuelepontremoli.bankingapp.network
+package com.samuelepontremoli.data.network
 
-import com.samuelepontremoli.bankingapp.BuildConfig
+import com.samuelepontremoli.data.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +11,10 @@ import java.util.concurrent.TimeUnit
 const val TIMEOUT_TIME: Long = 30
 
 fun createNetworkClient(baseUrl: String) =
-    retrofitClient(baseUrl, httpClient())
+    retrofitClient(
+        baseUrl,
+        httpClient()
+    )
 
 private fun httpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)

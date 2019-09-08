@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.entities
+package com.samuelepontremoli.data.db.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation

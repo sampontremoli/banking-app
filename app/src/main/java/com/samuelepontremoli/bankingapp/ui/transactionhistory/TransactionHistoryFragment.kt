@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
-import com.samuelepontremoli.bankingapp.entities.Status
+import com.samuelepontremoli.data.network.entities.Status
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,11 +19,11 @@ class TransactionHistoryFragment : Fragment() {
     private lateinit var transactionHistoryAdapter: TransactionHistoryAdapter
 
     companion object {
+        val TAG = TransactionHistoryFragment::class.java.simpleName
+
         fun newInstance(): TransactionHistoryFragment {
             return TransactionHistoryFragment()
         }
-
-        val TAG = TransactionHistoryFragment::class.java.simpleName
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,24 +39,23 @@ class TransactionHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /**
         transactionHistory.getTransactionHistory().observe(this, Observer {
-        when (it?.responseType) {
-        Status.ERROR -> {
-        //Error handling
-        }
-        Status.LOADING -> {
-        //Progress
-        }
-        Status.SUCCESSFUL -> {
-        // On Successful response
-        }
-        }
-        it?.data?.let { response ->
-        transactionHistoryAdapter.updateList(response.transactions)
-        }
+            when (it?.responseType) {
+                Status.ERROR -> {
+                    //Error handling
+                }
+                Status.LOADING -> {
+                    //Progress
+                }
+                Status.SUCCESSFUL -> {
+                    // On Successful response
+                    it.data?.let { response ->
+                        transactionHistoryAdapter.updateList(response.transactions)
+                    }
+                }
+            }
+
         })
-         */
     }
 
     private fun createRecyclerView(view: View) {
