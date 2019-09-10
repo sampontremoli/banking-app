@@ -1,7 +1,9 @@
 package com.samuelepontremoli.bankingapp.ui.transaction
 
+import com.samuelepontremoli.data.network.entities.Transaction
+
 interface ItemClickListener {
 
-    fun transactionClicked(transactionId: String)
+    fun itemClicked(transaction: Transaction)
 
 }

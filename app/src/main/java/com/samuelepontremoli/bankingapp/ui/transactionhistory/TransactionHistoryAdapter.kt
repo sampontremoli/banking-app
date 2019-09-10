@@ -44,7 +44,7 @@ class TransactionHistoryAdapter(val itemClickListener: ItemClickListener?) :
                 transaction_other_account.text = transaction.otherAccount
                 transaction_date.text = transaction.date
                 setOnClickListener {
-                    itemClickListener?.transactionClicked(transaction.id)
+                    itemClickListener?.itemClicked(transaction)
                 }
             }
         }

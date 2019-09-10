@@ -10,17 +10,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TransactionDetailFragment : Fragment() {
 
-    private var transactionId: String? = null
+    private val transactionId: String? by lazy {
+        val safeArgs = arguments?.let { TransactionDetailFragmentArgs.fromBundle(it) }
+        safeArgs?.transactionId
+    }
 
     private val transactionDetail: TransactionDetailViewModel by viewModel()
 
     companion object {
         val TAG = TransactionDetailFragment::class.java.simpleName
 
-        fun newInstance(transactionId: String): TransactionDetailFragment {
-            val fragment = TransactionDetailFragment()
-            fragment.transactionId = transactionId
-            return fragment
+        fun newInstance(): TransactionDetailFragment {
+            return TransactionDetailFragment()
         }
     }
 

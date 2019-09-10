@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.ui.transaction.ItemClickListener
 import com.samuelepontremoli.data.network.entities.Status
+import com.samuelepontremoli.data.network.entities.Transaction
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,18 +23,14 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
     private lateinit var listAdapter: TransactionHistoryAdapter
 
     companion object {
-        private val TAG = TransactionHistoryFragment::class.java.simpleName
+        val TAG = TransactionHistoryFragment::class.java.simpleName
 
         fun newInstance(): TransactionHistoryFragment {
             return TransactionHistoryFragment()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_transaction_history, container, false)
         createRecyclerView(view)
         return view
@@ -74,8 +71,12 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         }
     }
 
-    override fun transactionClicked(transactionId: String) {
-        findNavController().navigate(R.id.action_history_to_detail)
+    override fun itemClicked(transaction: Transaction) {
+        val actionDetail =
+            TransactionHistoryFragmentDirections.actionTransactionHistoryToTransactionDetail(
+                transaction.id
+            )
+        findNavController().navigate(actionDetail)
     }
 
 }

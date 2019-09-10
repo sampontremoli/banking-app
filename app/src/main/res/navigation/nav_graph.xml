@@ -10,13 +10,23 @@
         android:name="com.samuelepontremoli.bankingapp.ui.transactionhistory.TransactionHistoryFragment"
         android:label="TransactionHistoryFragment"
         tools:layout="@layout/fragment_transaction_history">
+
         <action
-            android:id="@+id/action_history_to_detail"
-            app:destination="@id/transactionDetailFragment" />
+            android:id="@+id/action_transactionHistory_to_transactionDetail"
+            app:destination="@+id/transactionDetailFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/transactionDetailFragment"
         android:name="com.samuelepontremoli.bankingapp.ui.transactiondetail.TransactionDetailFragment"
         android:label="TransactionDetailFragment"
-        tools:layout="@layout/fragment_transaction_detail" />
+        tools:layout="@layout/fragment_transaction_detail" >
+
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+
+    </fragment>
+
 </navigation>
