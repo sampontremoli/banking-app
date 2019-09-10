@@ -6,9 +6,10 @@
 2. Clean Architecture
 2. MVVM
 3. Koin
-4. Room
+4. Room Caching
 5. RxJava
 6. Retrofit
+7. Navigation Architecture Component
 
 ### Developed By
 

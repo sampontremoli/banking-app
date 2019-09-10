@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/transactionHistoryFragment">
+
+    <fragment
+        android:id="@+id/transactionHistoryFragment"
+        android:name="com.samuelepontremoli.bankingapp.ui.transactionhistory.TransactionHistoryFragment"
+        android:label="TransactionHistoryFragment"
+        tools:layout="@layout/fragment_transaction_history">
+        <action
+            android:id="@+id/action_history_to_detail"
+            app:destination="@id/transactionDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionDetailFragment"
+        android:name="com.samuelepontremoli.bankingapp.ui.transactiondetail.TransactionDetailFragment"
+        android:label="TransactionDetailFragment"
+        tools:layout="@layout/fragment_transaction_detail" />
+</navigation>

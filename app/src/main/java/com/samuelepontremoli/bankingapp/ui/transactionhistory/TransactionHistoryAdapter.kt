@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
+import com.samuelepontremoli.bankingapp.ui.transaction.ItemClickListener
 import com.samuelepontremoli.data.network.entities.Transaction
 import kotlinx.android.synthetic.main.item_transaction.view.*
 
-class TransactionHistoryAdapter :
+class TransactionHistoryAdapter(val itemClickListener: ItemClickListener?) :
     RecyclerView.Adapter<TransactionHistoryAdapter.TransactionViewHolder>() {
 
     var transactions = mutableListOf<Transaction>()
@@ -22,7 +23,7 @@ class TransactionHistoryAdapter :
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        holder.bind(transactions[position])
+        holder.bind(transactions[position], itemClickListener)
     }
 
     fun updateList(list: List<Transaction>) {
@@ -35,13 +36,16 @@ class TransactionHistoryAdapter :
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(transaction: Transaction) {
+        fun bind(transaction: Transaction, itemClickListener: ItemClickListener?) {
             with(itemView) {
-                itemView.transaction_id.text = transaction.id
-                itemView.transaction_amount.text = transaction.amount.toString()
-                itemView.transaction_description.text = transaction.description
-                itemView.transaction_other_account.text = transaction.otherAccount
-                itemView.transaction_date.text = transaction.date
+                transaction_id.text = transaction.id
+                transaction_amount.text = transaction.amount.toString()
+                transaction_description.text = transaction.description
+                transaction_other_account.text = transaction.otherAccount
+                transaction_date.text = transaction.date
+                setOnClickListener {
+                    itemClickListener?.transactionClicked(transaction.id)
+                }
             }
         }
 
