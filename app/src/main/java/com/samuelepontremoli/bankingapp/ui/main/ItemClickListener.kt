@@ -1,6 +1,6 @@
 package com.samuelepontremoli.bankingapp.ui.main
 
-import com.samuelepontremoli.data.network.entities.Transaction
+import com.samuelepontremoli.data.network.dto.Transaction
 
 interface ItemClickListener {
 

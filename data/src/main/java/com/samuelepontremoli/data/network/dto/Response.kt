@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.network.entities
+package com.samuelepontremoli.data.network.dto
 
 data class Response<RequestData>(var responseType: Status, var data: RequestData? = null, var error: Error? = null)
 

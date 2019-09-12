@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.network.entities.mapper
+package com.samuelepontremoli.data.mapper
 
 abstract class Mapper<in T, E> {
 

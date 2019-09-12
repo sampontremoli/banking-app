@@ -1,17 +1,17 @@
-package com.samuelepontremoli.data.network.entities.mapper
+package com.samuelepontremoli.data.mapper
 
-import com.samuelepontremoli.data.network.entities.Transaction
-import com.samuelepontremoli.data.network.entities.TransactionHistory
+import com.samuelepontremoli.data.network.dto.Transaction
+import com.samuelepontremoli.data.network.dto.Account
 import com.samuelepontremoli.data.db.entities.TransactionData
 import com.samuelepontremoli.data.db.entities.TransactionHistoryData
 
-class TransactionHistoryMapper: Mapper<TransactionHistoryData, TransactionHistory>() {
+class TransactionHistoryMapper: Mapper<TransactionHistoryData, Account>() {
 
-    override fun mapFrom(transactionData: TransactionHistoryData): TransactionHistory =
-        TransactionHistory(
-            account = transactionData.accountData.accountId,
-            balance = transactionData.accountData.balance,
-            transactions = mapTransactionsToPresentation(transactionData.transactions)
+    override fun mapFrom(from: TransactionHistoryData): Account =
+        Account(
+            account = from.accountData.accountId,
+            balance = from.accountData.balance,
+            transactions = mapTransactionsToPresentation(from.transactions)
         )
 
     private fun mapTransactionsToPresentation(articles: List<TransactionData>?): List<Transaction> =
