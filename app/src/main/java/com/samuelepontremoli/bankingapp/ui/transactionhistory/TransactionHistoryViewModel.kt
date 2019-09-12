@@ -3,9 +3,9 @@ package com.samuelepontremoli.bankingapp.ui.transactionhistory
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.samuelepontremoli.bankingapp.common.BaseViewModel
+import com.samuelepontremoli.data.db.entities.AccountData
 import com.samuelepontremoli.data.network.entities.Response
 import com.samuelepontremoli.data.network.entities.Status
-import com.samuelepontremoli.data.network.entities.TransactionHistory
 import com.samuelepontremoli.data.network.entities.mapper.TransactionHistoryMapper
 import com.samuelepontremoli.data.repository.TransactionHistoryRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +16,7 @@ class TransactionHistoryViewModel(
     private val mapper: TransactionHistoryMapper
 ) : BaseViewModel() {
 
-    private var transactionHistory = MutableLiveData<Response<TransactionHistory>>()
+    private var transactionHistory = MutableLiveData<Response<AccountData>>()
 
     override fun fetchData() {
         val disposable = repository.getTransactionHistoryRemote()

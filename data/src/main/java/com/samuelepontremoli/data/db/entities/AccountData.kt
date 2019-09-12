@@ -2,6 +2,7 @@ package com.samuelepontremoli.data.db.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -14,6 +15,10 @@ data class AccountData(
     val accountId: String,
 
     @SerializedName("balance")
-    val balance: Double
+    val balance: Double,
+
+    @SerializedName("transactions")
+    @Ignore
+    val transactions: List<TransactionData>
 
 )

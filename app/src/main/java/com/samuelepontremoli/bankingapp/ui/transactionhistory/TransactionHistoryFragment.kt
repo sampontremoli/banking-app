@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
-import com.samuelepontremoli.bankingapp.ui.transaction.ItemClickListener
+import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.data.network.entities.Status
 import com.samuelepontremoli.data.network.entities.Transaction
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
@@ -54,7 +54,7 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
                 Status.SUCCESSFUL -> {
                     // On Successful response
                     it.data?.let { response ->
-                        listAdapter.updateList(response.transactions)
+                        //listAdapter.updateList(response.transactions)
                     }
                 }
             }

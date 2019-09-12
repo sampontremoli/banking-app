@@ -1,4 +1,4 @@
-package com.samuelepontremoli.bankingapp.ui.transaction
+package com.samuelepontremoli.bankingapp.ui.main
 
 import com.samuelepontremoli.data.network.entities.Transaction
 

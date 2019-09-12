@@ -1,18 +1,18 @@
-package com.samuelepontremoli.bankingapp.ui.transaction
+package com.samuelepontremoli.bankingapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.samuelepontremoli.bankingapp.R
 
-class TransactionActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = TransactionActivity::class.java.simpleName
+        val TAG = MainActivity::class.java.simpleName
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transaction)
+        setContentView(R.layout.activity_main)
     }
 
 }
