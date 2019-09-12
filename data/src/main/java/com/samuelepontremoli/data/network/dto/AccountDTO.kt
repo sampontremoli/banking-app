@@ -1,12 +1,13 @@
 package com.samuelepontremoli.data.network.dto
 
 import com.google.gson.annotations.SerializedName
+import com.samuelepontremoli.data.presentation.Transaction
 
-data class Account (
+data class AccountDTO(
     @SerializedName("account")
-    val account : String,
+    val account: String,
     @SerializedName("balance")
-    val balance : Double,
+    val balance: Double,
     @SerializedName("transactions")
-    val transactions : List<Transaction>
+    val transactions: List<TransactionDTO>
 )

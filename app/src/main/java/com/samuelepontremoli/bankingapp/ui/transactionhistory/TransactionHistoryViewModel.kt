@@ -5,21 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import com.samuelepontremoli.bankingapp.common.BaseViewModel
 import com.samuelepontremoli.data.network.dto.Response
 import com.samuelepontremoli.data.network.dto.Status
-import com.samuelepontremoli.data.mapper.TransactionHistoryMapper
-import com.samuelepontremoli.data.network.dto.Account
+import com.samuelepontremoli.data.mapper.AccountDTOMapper
+import com.samuelepontremoli.data.presentation.Account
 import com.samuelepontremoli.data.repository.TransactionHistoryRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class TransactionHistoryViewModel(
     private val repository: TransactionHistoryRepository,
-    private val mapper: TransactionHistoryMapper
+    private val mapper: AccountDTOMapper
 ) : BaseViewModel() {
 
     private var transactionHistory = MutableLiveData<Response<Account>>()
 
     override fun fetchData() {
         val disposable = repository.getTransactionHistoryRemote()
+            .flatMap { mapper.Flowable(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->

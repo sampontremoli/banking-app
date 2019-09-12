@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.data.network.dto.Status
-import com.samuelepontremoli.data.network.dto.Transaction
+import com.samuelepontremoli.data.presentation.Transaction
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
-import com.samuelepontremoli.data.network.dto.Transaction
+import com.samuelepontremoli.data.presentation.Transaction
 import kotlinx.android.synthetic.main.item_transaction.view.*
 
 class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener?) :

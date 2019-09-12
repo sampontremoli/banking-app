@@ -2,15 +2,15 @@ package com.samuelepontremoli.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Transaction (
+data class TransactionDTO(
     @SerializedName("id")
-    val id : String,
+    val id: String,
     @SerializedName("amount")
-    val amount : Double,
+    val amount: Double,
     @SerializedName("description")
-    val description : String,
+    val description: String,
     @SerializedName("otherAccount")
-    val otherAccount : String,
+    val otherAccount: String,
     @SerializedName("date")
-    val date : String
+    val date: String
 )
