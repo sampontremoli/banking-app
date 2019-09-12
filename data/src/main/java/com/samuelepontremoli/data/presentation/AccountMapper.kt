@@ -1,11 +1,10 @@
-package com.samuelepontremoli.data.mapper
+package com.samuelepontremoli.data.presentation
 
+import com.samuelepontremoli.data.mapper.Mapper
 import com.samuelepontremoli.data.network.dto.AccountDTO
 import com.samuelepontremoli.data.network.dto.TransactionDTO
-import com.samuelepontremoli.data.presentation.Account
-import com.samuelepontremoli.data.presentation.Transaction
 
-class AccountDTOMapper: Mapper<AccountDTO, Account>() {
+class AccountMapper: Mapper<AccountDTO, Account>() {
 
     override fun mapFrom(from: AccountDTO): Account =
         Account(

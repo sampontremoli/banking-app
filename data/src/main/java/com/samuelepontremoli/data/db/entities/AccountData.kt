@@ -12,13 +12,13 @@ data class AccountData(
     @SerializedName("account")
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = false)
-    val accountId: String,
+    val account: String,
 
     @SerializedName("balance")
-    val balance: Double,
+    val balance: Double
 
-    @SerializedName("transactions")
-    @Ignore
-    val transactions: List<TransactionData>
+//    @SerializedName("transactions")
+//    @Ignore
+//    val transactions: List<TransactionData>
 
 )

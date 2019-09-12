@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.network.dto
+package com.samuelepontremoli.data.network
 
 data class Response<RequestData>(
     var responseType: Status,
