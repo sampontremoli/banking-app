@@ -7,13 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.samuelepontremoli.data.db.BankingDatabase.Companion.DB_VERSION
-import com.samuelepontremoli.data.db.entities.AccountData
-import com.samuelepontremoli.data.db.entities.TransactionData
+import com.samuelepontremoli.data.db.entities.AccountDb
+import com.samuelepontremoli.data.db.entities.TransactionDb
 
-@Database(entities = [AccountData::class, TransactionData::class], version = DB_VERSION)
+@Database(entities = [AccountDb::class, TransactionDb::class], version = DB_VERSION, exportSchema = true)
 abstract class BankingDatabase : RoomDatabase() {
 
-    abstract fun getTransactionHistoryDao(): TransactionHistoryDao
+    abstract fun accountDao(): AccountDao
+    abstract fun transactionDao(): TrasactionDao
 
     companion object {
         const val DB_VERSION = 1
@@ -32,7 +33,11 @@ abstract class BankingDatabase : RoomDatabase() {
         }
 
         private fun build(context: Context): BankingDatabase {
-            return Room.databaseBuilder(context.applicationContext, BankingDatabase::class.java, DB_NAME)
+            return Room.databaseBuilder(
+                context.applicationContext,
+                BankingDatabase::class.java,
+                DB_NAME
+            )
                 .addMigrations(MIGRATION_1_TO_2)
                 .build()
         }
