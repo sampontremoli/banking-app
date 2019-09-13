@@ -4,9 +4,9 @@ import com.samuelepontremoli.data.network.dto.AccountDTO
 import io.reactivex.Flowable
 import retrofit2.http.GET
 
-interface TransactionHistoryApi {
+interface AccountTransactionsApi {
 
     @GET("bins/1eku71")
-    fun getTransactionHistory(): Flowable<AccountDTO>
+    fun getAccountRemote(): Flowable<AccountDTO>
 
 }

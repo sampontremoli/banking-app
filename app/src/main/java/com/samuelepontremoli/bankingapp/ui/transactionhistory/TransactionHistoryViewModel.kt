@@ -7,19 +7,19 @@ import com.samuelepontremoli.data.network.Response
 import com.samuelepontremoli.data.network.Status
 import com.samuelepontremoli.data.presentation.AccountMapper
 import com.samuelepontremoli.data.presentation.Account
-import com.samuelepontremoli.data.repository.TransactionHistoryRepository
+import com.samuelepontremoli.data.repository.AccountRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class TransactionHistoryViewModel(
-    private val repository: TransactionHistoryRepository,
+    private val repository: AccountRepository,
     private val mapper: AccountMapper
 ) : BaseViewModel() {
 
     private var transactionHistory = MutableLiveData<Response<Account>>()
 
     override fun fetchData() {
-        val disposable = repository.getTransactionHistoryRemote()
+        val disposable = repository.getAccountRemote()
             .flatMap { mapper.Flowable(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

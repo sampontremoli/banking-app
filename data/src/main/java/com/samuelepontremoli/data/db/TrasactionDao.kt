@@ -8,7 +8,7 @@ import com.samuelepontremoli.data.db.entities.TransactionDb
 import io.reactivex.Flowable
 
 @Dao
-interface TrasactionDao {
+interface TransactionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTransaction(transaction: TransactionDb)

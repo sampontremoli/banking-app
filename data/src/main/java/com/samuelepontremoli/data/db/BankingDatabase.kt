@@ -10,34 +10,32 @@ import com.samuelepontremoli.data.db.BankingDatabase.Companion.DB_VERSION
 import com.samuelepontremoli.data.db.entities.AccountDb
 import com.samuelepontremoli.data.db.entities.TransactionDb
 
+/**
+ * Room Database of the application
+ */
 @Database(entities = [AccountDb::class, TransactionDb::class], version = DB_VERSION, exportSchema = true)
 abstract class BankingDatabase : RoomDatabase() {
 
     abstract fun accountDao(): AccountDao
-    abstract fun transactionDao(): TrasactionDao
+    abstract fun transactionDao(): TransactionDao
 
     companion object {
         const val DB_VERSION = 1
         private const val DB_NAME = "banking_database.db"
 
-        @Volatile
-        private var INSTANCE: BankingDatabase? = null
+        @Volatile private var instance: BankingDatabase? = null
 
         /**
          * Returns instance if not null, otherwise creates the db in a thread-safe way and returns it
          */
         fun getDatabase(context: Context): BankingDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: build(context).also { INSTANCE = it }
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
             }
         }
 
-        private fun build(context: Context): BankingDatabase {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                BankingDatabase::class.java,
-                DB_NAME
-            )
+        private fun buildDatabase(context: Context): BankingDatabase {
+            return Room.databaseBuilder(context.applicationContext, BankingDatabase::class.java, DB_NAME)
                 .addMigrations(MIGRATION_1_TO_2)
                 .build()
         }
