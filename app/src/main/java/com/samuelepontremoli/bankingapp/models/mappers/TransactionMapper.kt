@@ -1,5 +1,6 @@
-package com.samuelepontremoli.data.presentation
+package com.samuelepontremoli.bankingapp.models.mappers
 
+import com.samuelepontremoli.bankingapp.models.Transaction
 import com.samuelepontremoli.data.db.entities.TransactionDb
 import com.samuelepontremoli.data.mapper.Mapper
 

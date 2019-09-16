@@ -1,12 +1,11 @@
 package com.samuelepontremoli.bankingapp.ui.transactiondetail
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.samuelepontremoli.bankingapp.common.BaseViewModel
 import com.samuelepontremoli.data.network.Response
 import com.samuelepontremoli.data.network.Status
-import com.samuelepontremoli.data.presentation.Transaction
-import com.samuelepontremoli.data.presentation.TransactionMapper
+import com.samuelepontremoli.bankingapp.models.Transaction
+import com.samuelepontremoli.bankingapp.models.mappers.TransactionMapper
 import com.samuelepontremoli.data.repository.TransactionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

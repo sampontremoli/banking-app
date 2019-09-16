@@ -3,6 +3,7 @@ package com.samuelepontremoli.data.repository
 import com.samuelepontremoli.data.db.AccountDao
 import com.samuelepontremoli.data.db.BankingDatabase
 import com.samuelepontremoli.data.db.entities.AccountDb
+import com.samuelepontremoli.data.db.entities.AccountWithTransactionsDb
 import com.samuelepontremoli.data.db.entities.TransactionDb
 import com.samuelepontremoli.data.mapper.account.AccountDbNetworkMapper
 import com.samuelepontremoli.data.mapper.account.AccountNetworkDbMapper
@@ -25,7 +26,7 @@ class AccountRepository private constructor(
         return api.getAccountRemote()
     }
 
-    private fun getAccountLocal(): Flowable<AccountDb> {
+    private fun getAccountLocal(): Flowable<AccountWithTransactionsDb> {
         return accountDao.getAccount()
     }
 

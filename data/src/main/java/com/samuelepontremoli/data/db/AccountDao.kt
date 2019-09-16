@@ -2,6 +2,7 @@ package com.samuelepontremoli.data.db
 
 import androidx.room.*
 import com.samuelepontremoli.data.db.entities.AccountDb
+import com.samuelepontremoli.data.db.entities.AccountWithTransactionsDb
 import com.samuelepontremoli.data.db.entities.TransactionDb
 import io.reactivex.Flowable
 
@@ -14,7 +15,7 @@ interface AccountDao {
     @Insert
     fun insertAll(transactions: List<TransactionDb>)
 
-    @Query("SELECT * FROM account LIMIT 1")
-    fun getAccount(): Flowable<AccountDb>
+    @Query("SELECT * FROM account")
+    fun getAccount(): Flowable<AccountWithTransactionsDb>
 
 }

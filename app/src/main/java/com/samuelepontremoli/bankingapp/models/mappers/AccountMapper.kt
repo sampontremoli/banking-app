@@ -1,5 +1,7 @@
-package com.samuelepontremoli.data.presentation
+package com.samuelepontremoli.bankingapp.models.mappers
 
+import com.samuelepontremoli.bankingapp.models.Account
+import com.samuelepontremoli.bankingapp.models.Transaction
 import com.samuelepontremoli.data.mapper.Mapper
 import com.samuelepontremoli.data.network.dto.AccountDTO
 import com.samuelepontremoli.data.network.dto.TransactionDTO

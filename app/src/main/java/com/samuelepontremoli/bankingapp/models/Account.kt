@@ -1,4 +1,4 @@
-package com.samuelepontremoli.data.presentation
+package com.samuelepontremoli.bankingapp.models
 
 data class Account(
     val account: String,

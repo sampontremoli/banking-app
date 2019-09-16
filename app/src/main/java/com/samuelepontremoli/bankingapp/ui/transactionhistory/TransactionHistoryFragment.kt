@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
+import com.samuelepontremoli.bankingapp.extensions.hide
+import com.samuelepontremoli.bankingapp.extensions.show
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.data.network.Status
-import com.samuelepontremoli.data.presentation.Transaction
+import com.samuelepontremoli.bankingapp.models.Transaction
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,17 +25,12 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
 
     private lateinit var listAdapter: TransactionHistoryAdapter
 
-    companion object {
-        val TAG = TransactionHistoryFragment::class.java.simpleName
-
-        fun newInstance(): TransactionHistoryFragment {
-            return TransactionHistoryFragment()
-        }
-    }
+    private var loadingView: FrameLayout? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_transaction_history, container, false)
         createRecyclerView(view)
+        loadingView = view.findViewById(R.id.loading_view)
         return view
     }
 
@@ -47,15 +45,18 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
             when (it?.responseType) {
                 Status.ERROR -> {
                     //Error handling
+                    loadingView?.hide()
                 }
                 Status.LOADING -> {
                     //Progress
+                    loadingView?.show()
                 }
                 Status.SUCCESSFUL -> {
                     // On Successful response
                     it.data?.let { response ->
                         listAdapter.updateList(response.transactions)
                     }
+                    loadingView?.hide()
                 }
             }
 
@@ -77,6 +78,10 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
                 transaction.id
             )
         findNavController().navigate(actionDetail)
+    }
+
+    companion object {
+        val TAG = TransactionHistoryFragment::class.java.simpleName
     }
 
 }
