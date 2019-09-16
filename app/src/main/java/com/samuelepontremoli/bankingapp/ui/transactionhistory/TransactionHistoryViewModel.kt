@@ -19,7 +19,7 @@ class TransactionHistoryViewModel(
     private var transactionHistory = MutableLiveData<Response<Account>>()
 
     override fun fetchData() {
-        val disposable = repository.getAccountRemote()
+        val disposable = repository.getAccount()
             .flatMap { mapper.Flowable(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

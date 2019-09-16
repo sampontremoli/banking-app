@@ -11,7 +11,7 @@ val viewModelModule = module {
 
     viewModel {
         TransactionHistoryViewModel(
-            get(named(TRANSACTION_REPO)),
+            get(named(ACCOUNT_REPO)),
             mapper = AccountMapper()
         )
     }

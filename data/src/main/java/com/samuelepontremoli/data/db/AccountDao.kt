@@ -8,9 +8,9 @@ import io.reactivex.Flowable
 interface AccountDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAccount(account: AccountDb)
+    fun insertAccount(account: AccountDb)
 
-    @Query("SELECT * FROM account WHERE id = :accountId LIMIT 1")
-    fun getAccount(accountId: String): Flowable<AccountDb>
+    @Query("SELECT * FROM account LIMIT 1")
+    fun getAccount(): Flowable<AccountDb>
 
 }

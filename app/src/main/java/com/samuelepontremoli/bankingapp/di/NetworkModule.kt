@@ -29,12 +29,12 @@ val networkModule = module {
     single(named(ACCOUNT_REPO)) {
         AccountRepository.getInstance(
             get(named(ACCOUNT_TRANSACTION_API)),
-            (get(named(DATABASE)) as BankingDatabase).accountDao()
+            get(named(DATABASE))
         )
     }
-
+/**
     single(named(TRANSACTION_REPO)) {
         TransactionRepository.getInstance((get(named(DATABASE)) as BankingDatabase).transactionDao())
     }
-
+**/
 }

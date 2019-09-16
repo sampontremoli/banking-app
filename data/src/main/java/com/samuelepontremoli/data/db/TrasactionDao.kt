@@ -11,7 +11,7 @@ import io.reactivex.Flowable
 interface TransactionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTransaction(transaction: TransactionDb)
+    fun insertTransaction(transaction: TransactionDb)
 
     @Query("SELECT * FROM transactions WHERE account_id = :accountId ORDER BY date DESC")
     fun getTransactionsForAccountByDate(accountId: String): Flowable<TransactionDb>
