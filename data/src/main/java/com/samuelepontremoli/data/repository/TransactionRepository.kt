@@ -1,5 +1,6 @@
 package com.samuelepontremoli.data.repository
 
+import com.samuelepontremoli.data.db.BankingDatabase
 import com.samuelepontremoli.data.db.TransactionDao
 import com.samuelepontremoli.data.db.entities.TransactionDb
 import io.reactivex.Flowable
@@ -12,8 +13,12 @@ class TransactionRepository private constructor(
         return transactionDao.getTransactionsForAccountByDate(accountId)
     }
 
-    suspend fun insertTransaction(transaction: TransactionDb) {
+    fun insertTransaction(transaction: TransactionDb) {
         transactionDao.insertTransaction(transaction)
+    }
+
+    fun getTransactionById(transactionId: String): Flowable<TransactionDb> {
+        return transactionDao.getTransactionById(transactionId)
     }
 
     companion object {
@@ -21,9 +26,9 @@ class TransactionRepository private constructor(
         @Volatile
         private var instance: TransactionRepository? = null
 
-        fun getInstance(transactionDao: TransactionDao) =
+        fun getInstance(database: BankingDatabase) =
             instance ?: synchronized(this) {
-                instance ?: TransactionRepository(transactionDao).also { instance = it }
+                instance ?: TransactionRepository(database.transactionDao()).also { instance = it }
             }
 
     }

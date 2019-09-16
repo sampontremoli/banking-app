@@ -16,4 +16,7 @@ interface TransactionDao {
     @Query("SELECT * FROM transactions WHERE account_id = :accountId ORDER BY date DESC")
     fun getTransactionsForAccountByDate(accountId: String): Flowable<TransactionDb>
 
+    @Query("SELECT * FROM transactions WHERE id = :transactionId")
+    fun getTransactionById(transactionId: String): Flowable<TransactionDb>
+
 }

@@ -3,22 +3,23 @@ package com.samuelepontremoli.data.repository
 import com.samuelepontremoli.data.db.AccountDao
 import com.samuelepontremoli.data.db.BankingDatabase
 import com.samuelepontremoli.data.db.entities.AccountDb
+import com.samuelepontremoli.data.db.entities.TransactionDb
 import com.samuelepontremoli.data.mapper.account.AccountDbNetworkMapper
 import com.samuelepontremoli.data.mapper.account.AccountNetworkDbMapper
+import com.samuelepontremoli.data.mapper.transaction.TransactionNetworkDbMapper
 import com.samuelepontremoli.data.network.AccountTransactionsApi
 import com.samuelepontremoli.data.network.dto.AccountDTO
 import io.reactivex.Flowable
 
 class AccountRepository private constructor(
     private val api: AccountTransactionsApi,
-    database: BankingDatabase
+    private val accountDao: AccountDao
 ) {
-
-    private val accountDao: AccountDao = database.accountDao()
 
     //TODO INJECT
     private val accountDbNetworkMapper: AccountDbNetworkMapper = AccountDbNetworkMapper()
     private val accountNetworkDbMapper: AccountNetworkDbMapper = AccountNetworkDbMapper()
+    private val transactionsNetworkDbMapper: TransactionNetworkDbMapper = TransactionNetworkDbMapper()
 
     private fun getAccountRemote(): Flowable<AccountDTO> {
         return api.getAccountRemote()
@@ -28,15 +29,19 @@ class AccountRepository private constructor(
         return accountDao.getAccount()
     }
 
-    private fun insertAccount(account: AccountDb) {
-        return accountDao.insertAccount(account)
+    private fun insertAccount(account: AccountDb, transactions: List<TransactionDb>) {
+        accountDao.insertAccount(account)
+        accountDao.insertAll(transactions)
     }
 
     fun getAccount(): Flowable<AccountDTO> {
         val updatedAccount = getAccountRemote()
         return getAccountLocal().flatMap { accountDbNetworkMapper.Flowable(it) }
             .mergeWith(updatedAccount.doOnNext { remoteAccount ->
-                insertAccount(accountNetworkDbMapper.mapFrom(remoteAccount))
+                insertAccount(
+                    accountNetworkDbMapper.mapFrom(remoteAccount),
+                    transactionsNetworkDbMapper.mapFrom(remoteAccount)
+                )
             })
     }
 
@@ -47,7 +52,7 @@ class AccountRepository private constructor(
 
         fun getInstance(api: AccountTransactionsApi, database: BankingDatabase) =
             instance ?: synchronized(this) {
-                instance ?: AccountRepository(api, database).also { instance = it }
+                instance ?: AccountRepository(api, database.accountDao()).also { instance = it }
             }
 
     }
