@@ -38,11 +38,9 @@ class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener
 
         fun bind(transaction: Transaction, itemClickListener: ItemClickListener?) {
             with(itemView) {
-                transaction_id.text = transaction.id
-                transaction_amount.text = transaction.amount.toString()
+                transaction_amount.text = transaction.amountBeautified
                 transaction_description.text = transaction.description
-                transaction_other_account.text = transaction.otherAccount
-                transaction_date.text = transaction.date
+                transaction_date.text = transaction.dateFormatted
                 setOnClickListener {
                     itemClickListener?.itemClicked(transaction)
                 }

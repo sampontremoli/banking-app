@@ -8,16 +8,16 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.extensions.hide
 import com.samuelepontremoli.bankingapp.extensions.show
+import com.samuelepontremoli.bankingapp.models.Transaction
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.data.network.Status
-import com.samuelepontremoli.bankingapp.models.Transaction
 import kotlinx.android.synthetic.main.fragment_transaction_history.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class TransactionHistoryFragment : Fragment(), ItemClickListener {
 
@@ -59,15 +59,18 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
                     loadingView?.hide()
                 }
             }
-
         })
     }
 
     private fun createRecyclerView(view: View) {
         listAdapter = TransactionHistoryAdapter(this)
         with(view) {
-            transactions_list.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            //transactions_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            //TODO MAGIC NUMBERS
+            transactions_list.layoutManager = GridLayoutManager(context, 2)
+            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.list_spacing)
+
+            transactions_list.addItemDecoration(GridItemDecoration(spacingInPixels))
             transactions_list.adapter = listAdapter
         }
     }
