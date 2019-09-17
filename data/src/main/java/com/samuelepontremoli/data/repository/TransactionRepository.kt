@@ -9,16 +9,12 @@ class TransactionRepository private constructor(
     private val transactionDao: TransactionDao
 ) {
 
-    fun getTransactionHistoryLocal(accountId: String): Flowable<TransactionDb> {
-        return transactionDao.getTransactionsForAccountByDate(accountId)
-    }
-
-    fun insertTransaction(transaction: TransactionDb) {
-        transactionDao.insertTransaction(transaction)
-    }
-
     fun getTransactionById(transactionId: String): Flowable<TransactionDb> {
         return transactionDao.getTransactionById(transactionId)
+    }
+
+    fun getTransactionsUntilCurrent(date: String): Flowable<List<TransactionDb>> {
+        return transactionDao.getTransactionsUntilCurrent(date)
     }
 
     companion object {

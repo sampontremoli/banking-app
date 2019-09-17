@@ -12,7 +12,7 @@ class TransactionMapper : Mapper<TransactionDb, Transaction>() {
         return Transaction(
             id = from.transactionId,
             amount = from.amount,
-            amountBeautified = from.amount.format(2),
+            amountFormatted = from.amount.format(2),
             description = from.description,
             otherAccount = from.otherAccount,
             date = from.date,

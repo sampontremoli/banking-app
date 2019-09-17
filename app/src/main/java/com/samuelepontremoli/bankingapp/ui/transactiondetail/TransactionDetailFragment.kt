@@ -66,7 +66,7 @@ class TransactionDetailFragment : Fragment() {
 
     private fun setupDetailView(data: Transaction) {
         transactionIdText.text = data.id
-        transactionAmountText.text = data.amountBeautified
+        transactionAmountText.text = data.amountFormatted
         transactionDateText.text = data.dateFormatted
         transactionDescriptionText.text = data.description
         transactionOtherAccountText.text = data.otherAccount

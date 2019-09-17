@@ -14,6 +14,7 @@ class AccountMapper : Mapper<AccountDTO, Account>() {
         Account(
             account = from.account,
             balance = from.balance,
+            balanceFormatted = from.balance.format(2),
             transactions = mapTransactionsToPresentation(from.transactions)
         )
 
@@ -26,7 +27,7 @@ class AccountMapper : Mapper<AccountDTO, Account>() {
         Transaction(
             id = transaction.id,
             amount = transaction.amount,
-            amountBeautified = transaction.amount.format(2),
+            amountFormatted = transaction.amount.format(2),
             description = transaction.description,
             otherAccount = transaction.otherAccount,
             date = transaction.date,

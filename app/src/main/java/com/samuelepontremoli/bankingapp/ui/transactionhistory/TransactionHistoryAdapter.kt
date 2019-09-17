@@ -5,40 +5,66 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
+import com.samuelepontremoli.bankingapp.models.Account
+import com.samuelepontremoli.bankingapp.models.BaseItem
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.bankingapp.models.Transaction
+import kotlinx.android.synthetic.main.item_account.view.*
 import kotlinx.android.synthetic.main.item_transaction.view.*
 
 class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener?) :
-    RecyclerView.Adapter<TransactionHistoryAdapter.TransactionViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var transactions = mutableListOf<Transaction>()
+    private var dataSet = mutableListOf<BaseItem>()
 
-    override fun getItemCount(): Int = transactions.size
+    override fun getItemCount(): Int = dataSet.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_transaction, parent, false)
-        return TransactionViewHolder(view)
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            isHeader() -> ItemType.TYPE_ACCOUNT.ordinal
+            else -> ItemType.TYPE_TRANSACTION.ordinal
+        }
     }
 
-    override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        holder.bind(transactions[position], itemClickListener)
+    private fun isHeader(): Int = 0
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ItemType.TYPE_ACCOUNT.ordinal -> AccountInfoViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_account, parent, false
+                )
+            )
+            else -> TransactionViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_transaction,
+                    parent,
+                    false
+                )
+            )
+        }
     }
 
-    fun updateList(list: List<Transaction>) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is TransactionViewHolder -> holder.bind(dataSet[position] as Transaction, itemClickListener)
+            is AccountInfoViewHolder -> holder.bind(dataSet[position] as Account)
+        }
+    }
+
+    fun updateList(list: List<BaseItem>) {
         if (list.isNotEmpty()) {
-            transactions.clear()
-            transactions.addAll(list)
+            dataSet.clear()
+            dataSet.addAll(list)
             notifyDataSetChanged()
         }
     }
 
-    class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(transaction: Transaction, itemClickListener: ItemClickListener?) {
             with(itemView) {
-                transaction_amount.text = transaction.amountBeautified
+                transaction_amount.text = transaction.amountFormatted
                 transaction_description.text = transaction.description
                 transaction_date.text = transaction.dateFormatted
                 setOnClickListener {
@@ -47,6 +73,21 @@ class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener
             }
         }
 
+    }
+
+    private class AccountInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(account: Account) {
+            with(itemView) {
+                balance_text.text = account.balanceFormatted
+            }
+        }
+
+    }
+
+    private enum class ItemType {
+        TYPE_TRANSACTION,
+        TYPE_ACCOUNT
     }
 
 }

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.extensions.hide
 import com.samuelepontremoli.bankingapp.extensions.show
+import com.samuelepontremoli.bankingapp.models.Account
+import com.samuelepontremoli.bankingapp.models.BaseItem
 import com.samuelepontremoli.bankingapp.models.Transaction
 import com.samuelepontremoli.bankingapp.ui.main.ItemClickListener
 import com.samuelepontremoli.data.network.Status
@@ -44,17 +46,14 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         viewModel.getTransactionHistory().observe(this, Observer {
             when (it?.responseType) {
                 Status.ERROR -> {
-                    //Error handling
                     loadingView?.hide()
                 }
                 Status.LOADING -> {
-                    //Progress
                     loadingView?.show()
                 }
                 Status.SUCCESSFUL -> {
-                    // On Successful response
                     it.data?.let { response ->
-                        listAdapter.updateList(response.transactions)
+                        addDataSet(response)
                     }
                     loadingView?.hide()
                 }
@@ -62,14 +61,30 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         })
     }
 
+    private fun addDataSet(response: Account) {
+        val list = mutableListOf<BaseItem>()
+        list.add(Account(response.account, response.balance, response.balanceFormatted, emptyList()))
+        list.addAll(response.transactions)
+        listAdapter.updateList(list)
+    }
+
     private fun createRecyclerView(view: View) {
         listAdapter = TransactionHistoryAdapter(this)
         with(view) {
-            //transactions_list.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            //TODO MAGIC NUMBERS
-            transactions_list.layoutManager = GridLayoutManager(context, 2)
-            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.list_spacing)
+            val layoutManager = GridLayoutManager(context, COLUMNS)
+            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 
+                override fun getSpanSize(position: Int): Int {
+                    return if(position == 0) {
+                        COLUMNS
+                    } else {
+                        1
+                    }
+                }
+
+            }
+            transactions_list.layoutManager = layoutManager
+            val spacingInPixels = resources.getDimensionPixelSize(R.dimen.list_spacing)
             transactions_list.addItemDecoration(GridItemDecoration(spacingInPixels))
             transactions_list.adapter = listAdapter
         }
@@ -84,6 +99,8 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
     }
 
     companion object {
+        const val COLUMNS = 2
+
         val TAG = TransactionHistoryFragment::class.java.simpleName
     }
 
