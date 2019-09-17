@@ -73,7 +73,6 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         with(view) {
             val layoutManager = GridLayoutManager(context, COLUMNS)
             layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-
                 override fun getSpanSize(position: Int): Int {
                     return if(position == 0) {
                         COLUMNS
@@ -81,7 +80,6 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
                         1
                     }
                 }
-
             }
             transactions_list.layoutManager = layoutManager
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.list_spacing)
@@ -100,7 +98,6 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
 
     companion object {
         const val COLUMNS = 2
-
         val TAG = TransactionHistoryFragment::class.java.simpleName
     }
 

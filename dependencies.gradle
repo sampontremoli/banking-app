@@ -1,0 +1,26 @@
+ext {
+    //Android
+    minSdkVersion = 19
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+
+    //Libs
+    androidxVersion = '1.1.0'
+    constraintLayoutVersion = '1.1.3'
+    cardViewRecyclerviewVersion = '1.0.0'
+    koinVersion = '2.0.1'
+    navigationVersion = '2.1.0'
+    rxJavaVersion = '2.2.12'
+    rxAndroidVersion = '2.1.1'
+    retrofitVersion = '2.6.1'
+    okLogginVersion = '4.2.0'
+    roomVersion = '2.1.0'
+    rxRoomVersion = '2.2.0-rc01'
+    debugDbVersion = '1.0.6'
+
+    //Test
+    junitVersion = '4.12'
+    androidxJunitVersion = '1.1.1'
+    testRunnerVersion = '1.2.0'
+    espressoVersion = '3.2.0'
+}
