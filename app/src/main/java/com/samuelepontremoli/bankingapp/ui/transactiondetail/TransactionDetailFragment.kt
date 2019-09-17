@@ -22,9 +22,16 @@ class TransactionDetailFragment : Fragment() {
     private lateinit var balanceBeforeText: TextView
     private lateinit var balanceAfterText: TextView
 
+    //TODO CONSIDER MOVING TO A METHOD
     private val transactionId: String? by lazy {
         val safeArgs = arguments?.let { TransactionDetailFragmentArgs.fromBundle(it) }
         safeArgs?.transactionId
+    }
+
+    //TODO CONSIDER MOVING TO A METHOD
+    private val transactionDate: String? by lazy {
+        val safeArgs = arguments?.let { TransactionDetailFragmentArgs.fromBundle(it) }
+        safeArgs?.transactionDate
     }
 
     private val viewModel: TransactionDetailViewModel by viewModel()
@@ -44,6 +51,7 @@ class TransactionDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.transactionId = transactionId ?: ""
+        viewModel.transactionDate = transactionDate ?: ""
         viewModel.fetchData()
     }
 

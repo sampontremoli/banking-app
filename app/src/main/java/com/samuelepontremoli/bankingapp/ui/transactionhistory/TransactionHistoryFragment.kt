@@ -91,7 +91,8 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
     override fun itemClicked(transaction: Transaction) {
         val actionDetail =
             TransactionHistoryFragmentDirections.actionTransactionHistoryToTransactionDetail(
-                transaction.id
+                transaction.id,
+                transaction.date
             )
         findNavController().navigate(actionDetail)
     }

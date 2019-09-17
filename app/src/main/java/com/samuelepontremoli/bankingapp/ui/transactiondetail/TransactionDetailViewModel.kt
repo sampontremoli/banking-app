@@ -17,6 +17,8 @@ class TransactionDetailViewModel(
 
     var transactionId: String = ""
 
+    var transactionDate: String = ""
+
     private var transaction = MutableLiveData<Response<Transaction>>()
 
     override fun fetchData() {
@@ -37,6 +39,16 @@ class TransactionDetailViewModel(
             }, {})
 
         addDisposable(disposable)
+
+        //TODO COMPLETE
+        val disposable2 = repository.getTransactionsUntilCurrent(transactionDate)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, {
+
+            })
     }
 
     fun getTransaction() = transaction
