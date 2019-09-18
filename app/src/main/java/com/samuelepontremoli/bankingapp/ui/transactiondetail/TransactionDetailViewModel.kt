@@ -39,16 +39,6 @@ class TransactionDetailViewModel(
             }, {})
 
         addDisposable(disposable)
-
-        //TODO COMPLETE
-        val disposable2 = repository.getTransactionsUntilCurrent(transactionDate)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            }, {
-
-            })
     }
 
     fun getTransaction() = transaction

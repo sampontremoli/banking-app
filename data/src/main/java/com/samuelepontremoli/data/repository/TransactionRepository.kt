@@ -13,10 +13,6 @@ class TransactionRepository private constructor(
         return transactionDao.getTransactionById(transactionId)
     }
 
-    fun getTransactionsUntilCurrent(date: String): Flowable<List<TransactionDb>> {
-        return transactionDao.getTransactionsUntilCurrent(date)
-    }
-
     companion object {
 
         @Volatile
