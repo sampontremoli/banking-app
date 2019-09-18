@@ -30,6 +30,10 @@ data class TransactionDb(
 
     @ColumnInfo(name = "other_account") val otherAccount: String,
 
-    @ColumnInfo(name = "date") val date: String
+    @ColumnInfo(name = "date") val date: String,
+
+    @ColumnInfo(name = "balance_before") var balanceBefore: Double,
+
+    @ColumnInfo(name = "balance_after") var balanceAfter: Double
 
 )

@@ -18,13 +18,16 @@ class AccountDbNetworkMapper : Mapper<AccountWithTransactionsDb, AccountDTO>() {
     }
 
     private fun mapDbTransactionToNetwork(transaction: TransactionDb): TransactionDTO {
-        return TransactionDTO(
+        val transactionDto = TransactionDTO(
             transaction.transactionId,
             transaction.amount,
             transaction.description,
             transaction.otherAccount,
             transaction.date
         )
+        transactionDto.balanceBefore = transaction.balanceBefore
+        transactionDto.balanceAfter = transaction.balanceAfter
+        return transactionDto
     }
 
 }

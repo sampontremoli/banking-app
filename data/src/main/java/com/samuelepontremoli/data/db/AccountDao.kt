@@ -15,6 +15,7 @@ interface AccountDao {
     @Insert
     fun insertAll(transactions: List<TransactionDb>)
 
+    @Transaction
     @Query("SELECT * FROM account")
     fun getAccount(): Flowable<AccountWithTransactionsDb>
 

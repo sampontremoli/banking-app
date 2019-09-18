@@ -13,4 +13,7 @@ data class TransactionDTO(
     val otherAccount: String,
     @SerializedName("date")
     val date: String
-)
+) {
+    var balanceBefore = 0.0
+    var balanceAfter = 0.0
+}

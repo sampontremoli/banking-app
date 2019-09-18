@@ -7,5 +7,7 @@ data class Transaction(
     val description: String,
     val otherAccount: String,
     val date: String,
-    val dateFormatted: String
+    val dateFormatted: String,
+    val balanceBefore: String,
+    val balanceAfter: String
 ) : BaseItem()

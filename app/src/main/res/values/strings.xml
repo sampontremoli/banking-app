@@ -3,4 +3,9 @@
 
     <string name="your_balance_label">your balance</string>
     <string name="euro_symbol">€</string>
+    <string name="id_label">ID</string>
+    <string name="date_label">Date</string>
+    <string name="other_account_label">Other Account</string>
+    <string name="balance_before_label">Balance before</string>
+    <string name="balance_after_label">Balance after</string>
 </resources>

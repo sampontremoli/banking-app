@@ -16,7 +16,9 @@ class TransactionMapper : Mapper<TransactionDb, Transaction>() {
             description = from.description,
             otherAccount = from.otherAccount,
             date = from.date,
-            dateFormatted = from.date.formatDateComplete()
+            dateFormatted = from.date.formatDateComplete(),
+            balanceBefore = from.balanceBefore.format(2),
+            balanceAfter = from.balanceAfter.format(2)
         )
     }
 

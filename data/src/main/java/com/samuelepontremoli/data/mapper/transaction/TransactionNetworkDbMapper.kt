@@ -17,7 +17,9 @@ class TransactionNetworkDbMapper : Mapper<AccountDTO, List<TransactionDb>>() {
             amount = transactionDto.amount,
             description = transactionDto.description,
             otherAccount = transactionDto.otherAccount,
-            date = transactionDto.date
+            date = transactionDto.date,
+            balanceBefore = 0.0,
+            balanceAfter = 0.0
         )
 
 }

@@ -21,7 +21,8 @@ class AccountMapper : Mapper<AccountDTO, Account>() {
     private fun mapTransactionsToPresentation(articles: List<TransactionDTO>?): List<Transaction> =
         articles?.map {
             mapTransactionToPresentation(it)
-        } ?: emptyList()
+            //TODO BAD SORTING LEXICOGRAPHICALLY
+        }?.sortedByDescending { it.date } ?: emptyList()
 
     private fun mapTransactionToPresentation(transaction: TransactionDTO): Transaction =
         Transaction(
@@ -31,7 +32,9 @@ class AccountMapper : Mapper<AccountDTO, Account>() {
             description = transaction.description,
             otherAccount = transaction.otherAccount,
             date = transaction.date,
-            dateFormatted = transaction.date.formatDateDayMonthTime()
+            dateFormatted = transaction.date.formatDateDayMonthTime(),
+            balanceBefore = transaction.balanceBefore.format(2),
+            balanceAfter = transaction.balanceAfter.format(2)
         )
 
 }

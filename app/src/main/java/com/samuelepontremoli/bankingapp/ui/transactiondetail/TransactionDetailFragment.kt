@@ -22,16 +22,12 @@ class TransactionDetailFragment : Fragment() {
     private lateinit var balanceBeforeText: TextView
     private lateinit var balanceAfterText: TextView
 
-    //TODO CONSIDER MOVING TO A METHOD
     private val transactionId: String? by lazy {
-        val safeArgs = arguments?.let { TransactionDetailFragmentArgs.fromBundle(it) }
-        safeArgs?.transactionId
+        arguments?.let { TransactionDetailFragmentArgs.fromBundle(it).transactionId }
     }
 
-    //TODO CONSIDER MOVING TO A METHOD
     private val transactionDate: String? by lazy {
-        val safeArgs = arguments?.let { TransactionDetailFragmentArgs.fromBundle(it) }
-        safeArgs?.transactionDate
+        arguments?.let { TransactionDetailFragmentArgs.fromBundle(it).transactionDate }
     }
 
     private val viewModel: TransactionDetailViewModel by viewModel()
@@ -78,8 +74,8 @@ class TransactionDetailFragment : Fragment() {
         transactionDateText.text = data.dateFormatted
         transactionDescriptionText.text = data.description
         transactionOtherAccountText.text = data.otherAccount
-        balanceBeforeText.text = "todo balance before"
-        balanceAfterText.text =  "todo balance after"
+        balanceBeforeText.text = data.balanceBefore
+        balanceAfterText.text =  data.balanceAfter
     }
 
     companion object {

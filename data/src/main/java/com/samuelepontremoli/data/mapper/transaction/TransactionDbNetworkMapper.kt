@@ -9,13 +9,17 @@ class TransactionDbNetworkMapper : Mapper<List<TransactionDb>, List<TransactionD
     override fun mapFrom(from: List<TransactionDb>): List<TransactionDTO> =
         from.map { mapDbTransactionToNetwork(it) }
 
-    private fun mapDbTransactionToNetwork(transaction: TransactionDb): TransactionDTO =
-        TransactionDTO(
+    private fun mapDbTransactionToNetwork(transaction: TransactionDb): TransactionDTO {
+        val transactionDto = TransactionDTO(
             id = transaction.transactionId,
             amount = transaction.amount,
             description = transaction.description,
             otherAccount = transaction.otherAccount,
             date = transaction.date
         )
+        transactionDto.balanceBefore = transaction.balanceBefore
+        transactionDto.balanceAfter = transaction.balanceAfter
+        return transactionDto
+    }
 
 }
