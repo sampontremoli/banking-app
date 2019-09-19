@@ -1,9 +1,10 @@
 package com.samuelepontremoli.bankingapp.models.mappers
 
-import com.samuelepontremoli.bankingapp.extensions.format
-import com.samuelepontremoli.bankingapp.extensions.formatDateDayMonthTime
+import com.samuelepontremoli.data.extensions.format
+import com.samuelepontremoli.data.extensions.formatDateDayMonthTime
 import com.samuelepontremoli.bankingapp.models.Account
 import com.samuelepontremoli.bankingapp.models.Transaction
+import com.samuelepontremoli.data.extensions.toDate
 import com.samuelepontremoli.data.mapper.Mapper
 import com.samuelepontremoli.data.network.dto.AccountDTO
 import com.samuelepontremoli.data.network.dto.TransactionDTO
@@ -21,8 +22,7 @@ class AccountMapper : Mapper<AccountDTO, Account>() {
     private fun mapTransactionsToPresentation(articles: List<TransactionDTO>?): List<Transaction> =
         articles?.map {
             mapTransactionToPresentation(it)
-            //TODO BAD SORTING LEXICOGRAPHICALLY
-        }?.sortedByDescending { it.date } ?: emptyList()
+        }?.sortedByDescending { it.date.toDate() } ?: emptyList()
 
     private fun mapTransactionToPresentation(transaction: TransactionDTO): Transaction =
         Transaction(

@@ -1,5 +1,6 @@
 package com.samuelepontremoli.bankingapp.ui.transactiondetail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.samuelepontremoli.bankingapp.common.BaseViewModel
 import com.samuelepontremoli.data.network.Response
@@ -16,8 +17,6 @@ class TransactionDetailViewModel(
 ) : BaseViewModel() {
 
     var transactionId: String = ""
-
-    var transactionDate: String = ""
 
     private var transaction = MutableLiveData<Response<Transaction>>()
 
@@ -41,7 +40,7 @@ class TransactionDetailViewModel(
         addDisposable(disposable)
     }
 
-    fun getTransaction() = transaction
+    fun getTransaction(): LiveData<Response<Transaction>> = transaction
 
     companion object {
         val TAG = TransactionDetailViewModel::class.java.simpleName

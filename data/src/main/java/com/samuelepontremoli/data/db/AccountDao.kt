@@ -19,4 +19,7 @@ interface AccountDao {
     @Query("SELECT * FROM account")
     fun getAccount(): Flowable<AccountWithTransactionsDb>
 
+    @Query("DELETE FROM account")
+    fun deleteAllFromAccount()
+
 }

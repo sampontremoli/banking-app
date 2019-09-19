@@ -1,7 +1,7 @@
 package com.samuelepontremoli.bankingapp.models.mappers
 
-import com.samuelepontremoli.bankingapp.extensions.format
-import com.samuelepontremoli.bankingapp.extensions.formatDateComplete
+import com.samuelepontremoli.data.extensions.format
+import com.samuelepontremoli.data.extensions.formatDateComplete
 import com.samuelepontremoli.bankingapp.models.Transaction
 import com.samuelepontremoli.data.db.entities.TransactionDb
 import com.samuelepontremoli.data.mapper.Mapper

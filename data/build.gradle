@@ -56,9 +56,12 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$rxRoomVersion"
     debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
 
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "android.arch.core:core-testing:$androidxJunitVersion"
 }

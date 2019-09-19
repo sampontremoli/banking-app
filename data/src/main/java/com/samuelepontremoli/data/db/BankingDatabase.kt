@@ -41,9 +41,7 @@ abstract class BankingDatabase : RoomDatabase() {
         }
 
         private val MIGRATION_1_TO_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-
-            }
+            override fun migrate(database: SupportSQLiteDatabase) = Unit
         }
 
     }

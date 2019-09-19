@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Banking App</string>
 
+    <!-- Labels -->
     <string name="your_balance_label">your balance</string>
     <string name="euro_symbol">€</string>
     <string name="id_label">ID</string>
@@ -8,4 +9,7 @@
     <string name="other_account_label">Other Account</string>
     <string name="balance_before_label">Balance before</string>
     <string name="balance_after_label">Balance after</string>
+
+    <!-- Errors -->
+    <string name="error_string">Ouch! There was a problem, please retry.</string>
 </resources>

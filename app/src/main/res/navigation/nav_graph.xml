@@ -31,10 +31,6 @@
             android:name="transactionId"
             app:argType="string" />
 
-        <argument
-            android:name="transactionDate"
-            app:argType="string" />
-
     </fragment>
 
 </navigation>

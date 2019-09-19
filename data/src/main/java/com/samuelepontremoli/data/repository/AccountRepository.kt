@@ -1,11 +1,11 @@
 package com.samuelepontremoli.data.repository
 
-import android.util.Log
 import com.samuelepontremoli.data.db.AccountDao
 import com.samuelepontremoli.data.db.BankingDatabase
 import com.samuelepontremoli.data.db.entities.AccountDb
 import com.samuelepontremoli.data.db.entities.AccountWithTransactionsDb
 import com.samuelepontremoli.data.db.entities.TransactionDb
+import com.samuelepontremoli.data.extensions.toDate
 import com.samuelepontremoli.data.mapper.account.AccountDbNetworkMapper
 import com.samuelepontremoli.data.mapper.account.AccountNetworkDbMapper
 import com.samuelepontremoli.data.mapper.transaction.TransactionNetworkDbMapper
@@ -33,13 +33,12 @@ class AccountRepository private constructor(
 
     private fun insertAccount(account: AccountDb, transactions: List<TransactionDb>) {
         accountDao.insertAccount(account)
-        accountDao.insertAll(computeTransactionBalanceBeforeAfter(transactions, account.balance))
+        accountDao.insertAll(createTransactionsWithBalances(transactions, account.balance))
     }
 
-    private fun computeTransactionBalanceBeforeAfter(transactions: List<TransactionDb>, balance: Double): List<TransactionDb> {
-        //TODO KINDA BAD, SHOULD NOT BE HANDLED LEXICOGRAPHICALLY
+    private fun createTransactionsWithBalances(transactions: List<TransactionDb>, balance: Double): List<TransactionDb> {
         var dynamicBalance = balance
-        val sortedTransactions = transactions.sortedByDescending { it.date }
+        val sortedTransactions = transactions.sortedByDescending { it.date.toDate() }
         sortedTransactions.forEach {
             it.balanceAfter = dynamicBalance
             dynamicBalance += -it.amount

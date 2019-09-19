@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactions_list"
         android:layout_width="match_parent"
-        android:padding="@dimen/list_spacing"
-        android:layout_height="match_parent" />
-
-    <FrameLayout
-        android:id="@+id/loading_view"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:visibility="gone">
+        android:padding="@dimen/list_spacing" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+    <include
+        layout="@layout/view_error"
+        tools:visibility="gone" />
 
-    </FrameLayout>
+    <include
+        layout="@layout/view_loading"
+        tools:visibility="gone" />
 
 </FrameLayout>

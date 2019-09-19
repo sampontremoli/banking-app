@@ -1,5 +1,6 @@
 package com.samuelepontremoli.bankingapp.ui.transactionhistory
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.samuelepontremoli.bankingapp.common.BaseViewModel
 import com.samuelepontremoli.data.network.Response
@@ -45,7 +46,7 @@ class TransactionHistoryViewModel(
         transactionHistory.value = Response(responseType = Status.LOADING)
     }
 
-    fun getTransactionHistory() = transactionHistory
+    fun getTransactionHistory(): LiveData<Response<Account>> = transactionHistory
 
     companion object {
         val TAG = TransactionHistoryViewModel::class.java.simpleName

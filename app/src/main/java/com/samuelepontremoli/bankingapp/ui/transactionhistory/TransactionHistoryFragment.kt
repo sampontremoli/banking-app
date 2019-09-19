@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,31 +30,39 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
 
     private var loadingView: FrameLayout? = null
 
+    private var errorView: FrameLayout? = null
+    private var retryCallToAction: LinearLayout? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_transaction_history, container, false)
         createRecyclerView(view)
         loadingView = view.findViewById(R.id.loading_view)
+        errorView = view.findViewById(R.id.error_view)
+        retryCallToAction = view.findViewById(R.id.retry_call_to_action)
+        retryCallToAction?.setOnClickListener { fetchData() }
         return view
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchData()
+        fetchData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTransactionHistory().observe(this, Observer {
+        viewModel.getTransactionHistory().observe(viewLifecycleOwner, Observer {
             when (it?.responseType) {
                 Status.ERROR -> {
                     loadingView?.hide()
+                    errorView?.show()
                 }
                 Status.LOADING -> {
+                    errorView?.hide()
                     loadingView?.show()
                 }
                 Status.SUCCESSFUL -> {
                     it.data?.let { response ->
-                        addDataSet(response)
+                        addDataSetToList(response)
                     }
                     loadingView?.hide()
                 }
@@ -61,9 +70,15 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         })
     }
 
-    private fun addDataSet(response: Account) {
+    private fun fetchData() {
+        viewModel.fetchData()
+    }
+
+    private fun addDataSetToList(response: Account) {
         val list = mutableListOf<BaseItem>()
-        list.add(Account(response.account, response.balance, response.balanceFormatted, emptyList()))
+        list.add(
+            Account(response.account, response.balance, response.balanceFormatted, emptyList())
+        )
         list.addAll(response.transactions)
         listAdapter.updateList(list)
     }
@@ -74,7 +89,7 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
             val layoutManager = GridLayoutManager(context, COLUMNS)
             layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
-                    return if(position == 0) {
+                    return if (position == 0) {
                         COLUMNS
                     } else {
                         1
@@ -91,8 +106,7 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
     override fun itemClicked(transaction: Transaction) {
         val actionDetail =
             TransactionHistoryFragmentDirections.actionTransactionHistoryToTransactionDetail(
-                transaction.id,
-                transaction.date
+                transaction.id
             )
         findNavController().navigate(actionDetail)
     }

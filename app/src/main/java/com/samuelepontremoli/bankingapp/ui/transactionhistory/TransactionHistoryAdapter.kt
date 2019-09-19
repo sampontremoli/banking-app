@@ -3,6 +3,7 @@ package com.samuelepontremoli.bankingapp.ui.transactionhistory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.samuelepontremoli.bankingapp.R
 import com.samuelepontremoli.bankingapp.models.Account
@@ -47,7 +48,10 @@ class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TransactionViewHolder -> holder.bind(dataSet[position] as Transaction, itemClickListener)
+            is TransactionViewHolder -> holder.bind(
+                dataSet[position] as Transaction,
+                itemClickListener
+            )
             is AccountInfoViewHolder -> holder.bind(dataSet[position] as Account)
         }
     }
@@ -64,9 +68,20 @@ class TransactionHistoryAdapter(private val itemClickListener: ItemClickListener
 
         fun bind(transaction: Transaction, itemClickListener: ItemClickListener?) {
             with(itemView) {
-                transaction_amount.text = transaction.amountFormatted
+                val currencySymbol = resources.getString(R.string.euro_symbol)
+                val amountFormattedDisplay = "$currencySymbol ${transaction.amountFormatted}"
+                transaction_amount.text = amountFormattedDisplay
                 transaction_description.text = transaction.description
                 transaction_date.text = transaction.dateFormatted
+                if (transaction.amount < 0) {
+                    transaction_amount.setTextColor(
+                        ContextCompat.getColor(itemView.context, R.color.colorAccent)
+                    )
+                } else {
+                    transaction_amount.setTextColor(
+                        ContextCompat.getColor(itemView.context, R.color.colorPrimary)
+                    )
+                }
                 setOnClickListener {
                     itemClickListener?.itemClicked(transaction)
                 }

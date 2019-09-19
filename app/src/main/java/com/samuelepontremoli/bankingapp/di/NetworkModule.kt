@@ -1,8 +1,8 @@
 package com.samuelepontremoli.bankingapp.di
 
-import com.samuelepontremoli.data.db.BankingDatabase
-import com.samuelepontremoli.data.network.createNetworkClient
+import com.samuelepontremoli.bankingapp.BuildConfig
 import com.samuelepontremoli.data.network.AccountTransactionsApi
+import com.samuelepontremoli.data.network.createNetworkClient
 import com.samuelepontremoli.data.repository.AccountRepository
 import com.samuelepontremoli.data.repository.TransactionRepository
 import org.koin.core.qualifier.named
@@ -17,7 +17,7 @@ const val TRANSACTION_REPO = "TransactionRepository"
 val networkModule = module {
 
     single(named(RETROFIT_INSTANCE)) {
-        createNetworkClient("https://api.myjson.com/")
+        createNetworkClient(BuildConfig.SERVER_URL)
     }
 
     single(named(ACCOUNT_TRANSACTION_API)) {
