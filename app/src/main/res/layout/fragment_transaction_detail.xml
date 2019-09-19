@@ -1,182 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/transaction_header_background"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/colorAccent"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:id="@+id/transaction_header_background"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/currency_symbol"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:text="@string/euro_symbol"
-                    android:textColor="@android:color/white"
-                    android:textSize="40sp"
-                    android:textStyle="normal" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/currency_symbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:text="@string/euro_symbol"
+                        android:textColor="@android:color/white"
+                        android:textSize="40sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/transaction_amount_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="40sp"
+                        android:textStyle="normal"
+                        tools:text="20,00" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/transaction_amount_text"
+                    android:id="@+id/transaction_description_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
-                    android:textStyle="normal"
-                    tools:text="20,00" />
+                    tools:text="lorem ipsum" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/transaction_description_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                style="@style/DetailItem"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/white"
-                tools:text="lorem ipsum" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/primaryText" />
+
+                <TextView
+                    android:id="@+id/transaction_id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/secondaryText"
+                    tools:text="trx1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DetailItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/primaryText" />
+
+                <TextView
+                    android:id="@+id/transaction_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/secondaryText"
+                    tools:text="27 Ago" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DetailItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/other_account_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/primaryText" />
+
+                <TextView
+                    android:id="@+id/transaction_other_account_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/secondaryText"
+                    tools:text="0938n91i8eu98ud" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DetailItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance_before_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/primaryText" />
+
+                <TextView
+                    android:id="@+id/balance_before_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/secondaryText"
+                    tools:text="€ 166,00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/DetailItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance_after_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/primaryText" />
+
+                <TextView
+                    android:id="@+id/balance_after_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/secondaryText"
+                    tools:text="€ 186,00" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/DetailItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/id_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/transaction_id_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/secondaryText"
-                tools:text="trx1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/DetailItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/date_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/transaction_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/secondaryText"
-                tools:text="27 Ago" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/DetailItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/other_account_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/transaction_other_account_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/secondaryText"
-                tools:text="0938n91i8eu98ud" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/DetailItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/balance_before_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/balance_before_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/secondaryText"
-                tools:text="€ 166,00" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/DetailItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/balance_after_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/balance_after_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/secondaryText"
-                tools:text="€ 186,00" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <include
-        layout="@layout/view_error"
-        tools:visibility="gone" />
+        <include
+            layout="@layout/view_error"
+            tools:visibility="gone" />
 
 
-    <include
-        layout="@layout/view_loading"
-        tools:visibility="gone" />
+        <include
+            layout="@layout/view_loading"
+            tools:visibility="gone" />
 
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>
