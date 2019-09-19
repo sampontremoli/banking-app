@@ -33,6 +33,11 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
     private var errorView: FrameLayout? = null
     private var retryCallToAction: LinearLayout? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fetchData()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_transaction_history, container, false)
         createRecyclerView(view)
@@ -41,11 +46,6 @@ class TransactionHistoryFragment : Fragment(), ItemClickListener {
         retryCallToAction = view.findViewById(R.id.retry_call_to_action)
         retryCallToAction?.setOnClickListener { fetchData() }
         return view
-    }
-
-    override fun onStart() {
-        super.onStart()
-        fetchData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
