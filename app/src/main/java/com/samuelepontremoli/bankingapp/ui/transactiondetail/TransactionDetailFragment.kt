@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.samuelepontremoli.bankingapp.R
@@ -25,6 +26,9 @@ class TransactionDetailFragment : Fragment() {
     private lateinit var transactionOtherAccountText: TextView
     private lateinit var balanceBeforeText: TextView
     private lateinit var balanceAfterText: TextView
+
+    private lateinit var transactionHeaderBackground: LinearLayout
+    private lateinit var currencySymbol: TextView
 
     private var loadingView: FrameLayout? = null
 
@@ -46,6 +50,9 @@ class TransactionDetailFragment : Fragment() {
         transactionOtherAccountText = view.findViewById(R.id.transaction_other_account_text)
         balanceBeforeText = view.findViewById(R.id.balance_before_text)
         balanceAfterText = view.findViewById(R.id.balance_after_text)
+
+        transactionHeaderBackground = view.findViewById(R.id.transaction_header_background)
+        currencySymbol = view.findViewById(R.id.currency_symbol)
 
         loadingView = view.findViewById(R.id.loading_view)
         errorView = view.findViewById(R.id.error_view)
@@ -95,6 +102,19 @@ class TransactionDetailFragment : Fragment() {
         balanceBeforeText.text = balanceBeforeDisplay
         val balanceAfterTextDisplay = "$currencySymbol ${transaction.balanceAfter}"
         balanceAfterText.text = balanceAfterTextDisplay
+        //If transaction is inbound, we change the header color
+        setupHeaderColor(transaction.amount > 0)
+    }
+
+    private fun setupHeaderColor(isTransctionPositive: Boolean) {
+        if (isTransctionPositive) {
+            val backgroundColor = context?.let { ContextCompat.getColor(it, R.color.colorPrimaryLight) }
+            val textColor = context?.let { ContextCompat.getColor(it, R.color.primaryText) }
+            backgroundColor?.let { transactionHeaderBackground.setBackgroundColor(it) }
+            textColor?.let { currencySymbol.setTextColor(it) }
+            textColor?.let { transactionAmountText.setTextColor(it) }
+            textColor?.let { transactionDescriptionText.setTextColor(it) }
+        }
     }
 
     companion object {
