@@ -15,13 +15,11 @@ import io.reactivex.Flowable
 
 class AccountRepository private constructor(
     private val api: AccountTransactionsApi,
-    private val accountDao: AccountDao
+    private val accountDao: AccountDao,
+    private val accountDbNetworkMapper: AccountDbNetworkMapper,
+    private val accountNetworkDbMapper: AccountNetworkDbMapper,
+    private val transactionsNetworkDbMapper: TransactionNetworkDbMapper
 ) {
-
-    //TODO INJECT
-    private val accountDbNetworkMapper: AccountDbNetworkMapper = AccountDbNetworkMapper()
-    private val accountNetworkDbMapper: AccountNetworkDbMapper = AccountNetworkDbMapper()
-    private val transactionsNetworkDbMapper: TransactionNetworkDbMapper = TransactionNetworkDbMapper()
 
     private fun getAccountRemote(): Flowable<AccountDTO> {
         return api.getAccountRemote()
@@ -36,7 +34,10 @@ class AccountRepository private constructor(
         accountDao.insertAll(createTransactionsWithBalances(transactions, account.balance))
     }
 
-    private fun createTransactionsWithBalances(transactions: List<TransactionDb>, balance: Double): List<TransactionDb> {
+    private fun createTransactionsWithBalances(
+        transactions: List<TransactionDb>,
+        balance: Double
+    ): List<TransactionDb> {
         var dynamicBalance = balance
         val sortedTransactions = transactions.sortedByDescending { it.date.toDate() }
         sortedTransactions.forEach {
@@ -63,9 +64,20 @@ class AccountRepository private constructor(
         @Volatile
         private var instance: AccountRepository? = null
 
-        fun getInstance(api: AccountTransactionsApi, database: BankingDatabase) =
+        fun getInstance(
+            api: AccountTransactionsApi, database: BankingDatabase,
+            accountDbNetworkMapper: AccountDbNetworkMapper,
+            accountNetworkDbMapper: AccountNetworkDbMapper,
+            transactionsNetworkDbMapper: TransactionNetworkDbMapper
+        ) =
             instance ?: synchronized(this) {
-                instance ?: AccountRepository(api, database.accountDao()).also { instance = it }
+                instance ?: AccountRepository(
+                    api,
+                    database.accountDao(),
+                    accountDbNetworkMapper,
+                    accountNetworkDbMapper,
+                    transactionsNetworkDbMapper
+                ).also { instance = it }
             }
 
     }

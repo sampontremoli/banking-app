@@ -1,6 +1,9 @@
 package com.samuelepontremoli.bankingapp.di
 
 import com.samuelepontremoli.bankingapp.BuildConfig
+import com.samuelepontremoli.data.mapper.account.AccountDbNetworkMapper
+import com.samuelepontremoli.data.mapper.account.AccountNetworkDbMapper
+import com.samuelepontremoli.data.mapper.transaction.TransactionNetworkDbMapper
 import com.samuelepontremoli.data.network.AccountTransactionsApi
 import com.samuelepontremoli.data.network.createNetworkClient
 import com.samuelepontremoli.data.repository.AccountRepository
@@ -29,7 +32,10 @@ val networkModule = module {
     single(named(ACCOUNT_REPO)) {
         AccountRepository.getInstance(
             get(named(ACCOUNT_TRANSACTION_API)),
-            get(named(DATABASE))
+            get(named(DATABASE)),
+            accountDbNetworkMapper = AccountDbNetworkMapper(),
+            accountNetworkDbMapper = AccountNetworkDbMapper(),
+            transactionsNetworkDbMapper = TransactionNetworkDbMapper()
         )
     }
 
